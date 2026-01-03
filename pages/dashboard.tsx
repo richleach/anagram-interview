@@ -19,7 +19,9 @@ interface DashboardProps {
   userCount: number;
 }
 
-export const getServerSideProps: GetServerSideProps<DashboardProps> = async (context) => {
+export const getServerSideProps: GetServerSideProps<DashboardProps> = async (
+  context
+) => {
   const session = await auth.api.getSession({
     headers: new Headers(context.req.headers as Record<string, string>),
   });
@@ -68,7 +70,11 @@ export const getServerSideProps: GetServerSideProps<DashboardProps> = async (con
   };
 };
 
-export default function DashboardPage({ user, org, userCount }: DashboardProps) {
+export default function DashboardPage({
+  user,
+  org,
+  userCount,
+}: DashboardProps) {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -95,20 +101,26 @@ export default function DashboardPage({ user, org, userCount }: DashboardProps) 
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
+            Rich's github repo:
+            <br />
+            https://github.com/richleach/anagram-interview.git
+          </h2>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Welcome, {user.name}!
           </h2>
           <p className="text-gray-600 mb-6">
-            You are logged in as <span className="font-medium">{user.role}</span> at {org.name}.
+            You are logged in as{" "}
+            <span className="font-medium">{user.role}</span> at {org.name}.
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-blue-50 rounded-lg p-4">
               <p className="text-3xl font-bold text-blue-600">{userCount}</p>
-              <p className="text-sm text-blue-800">Users in your organization</p>
+              <p className="text-sm text-blue-800">
+                Users in your organization
+              </p>
             </div>
           </div>
-
           <div className="mt-6">
             <Link
               href="/users"
@@ -117,6 +129,13 @@ export default function DashboardPage({ user, org, userCount }: DashboardProps) 
               Manage Users
             </Link>
           </div>
+          Test actions: <br />
+          &middot; To test new user email: add a new user in the admin
+          <br />
+          &middot; To test digest email:
+          <br /> curl -H "Authorization: Bearer my_interview_secret_123"
+          http://localhost:3000/api/cron/digest
+          <br />
         </div>
       </main>
     </div>
