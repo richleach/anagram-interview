@@ -119,3 +119,9 @@ interview-starter/
 - `npx prisma studio` - Open Prisma database GUI
 - `npx prisma migrate dev` - Run migrations
 - `npx prisma db seed` - Seed database
+
+- to test digest functionality:
+curl -H "Authorization: Bearer my_interview_secret_123" http://localhost:3000/api/cron/digest
+
+to test new user email:
+add a new user in the admin
